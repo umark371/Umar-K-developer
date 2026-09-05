@@ -47,10 +47,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           <X className="w-5 h-5" />
         </button>
 
-        {/* Category & Badge */}
-        <div className="flex items-center gap-2 mb-3">
+        {/* Category, Location & Badge */}
+        <div className="flex flex-wrap items-center gap-2 mb-3">
           <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-emerald-950/80 border border-emerald-800/60 text-emerald-300">
             {project.category}
+          </span>
+          <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-black border border-neutral-800 text-neutral-300">
+            {project.clientLocation}
           </span>
           <span className="text-xs text-neutral-400">Case Study &amp; Technical Breakdown</span>
         </div>

@@ -13,6 +13,8 @@ export interface PortfolioProject {
   id: string;
   title: string;
   category: 'Business' | 'Landing Pages' | 'E-Commerce' | 'Editorial' | 'Custom Solutions' | 'Portfolio';
+  clientCountry: 'Pakistan' | 'India' | 'USA' | 'UK' | 'Russia';
+  clientLocation: string;
   summary: string;
   challenge: string;
   solution: string;
