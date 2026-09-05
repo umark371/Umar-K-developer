@@ -60,3 +60,21 @@ export function getMailtoUrl(subject?: string, body?: string): string {
   const mailBody = body ? `&body=${encodeURIComponent(body)}` : '';
   return `mailto:${SITE_CONFIG.contact.emailAddress}?subject=${encodeURIComponent(mailSubject)}${mailBody}`;
 }
+
+/**
+ * Helper to build Gmail Web compose URLs (works reliably in any browser)
+ */
+export function getGmailComposeUrl(subject?: string, body?: string): string {
+  const mailSubject = subject || SITE_CONFIG.contact.emailSubject;
+  const mailBody = body || '';
+  return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(SITE_CONFIG.contact.emailAddress)}&su=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+}
+
+/**
+ * Helper to build Outlook Web compose URLs
+ */
+export function getOutlookComposeUrl(subject?: string, body?: string): string {
+  const mailSubject = subject || SITE_CONFIG.contact.emailSubject;
+  const mailBody = body || '';
+  return `https://outlook.live.com/mail/0/deeplink/compose?to=${encodeURIComponent(SITE_CONFIG.contact.emailAddress)}&subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+}

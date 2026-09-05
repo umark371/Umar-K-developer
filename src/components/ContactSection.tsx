@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { SITE_CONFIG, getWhatsAppUrl, getMailtoUrl } from '../config/siteConfig';
+import { SITE_CONFIG, getWhatsAppUrl, getGmailComposeUrl } from '../config/siteConfig';
 import { 
   MessageCircle, 
   Mail, 
   CheckCircle2, 
   AlertCircle, 
-  ShieldCheck
+  ShieldCheck,
+  ExternalLink,
+  Copy,
+  Check
 } from 'lucide-react';
 
 interface ContactSectionProps {
@@ -13,12 +16,14 @@ interface ContactSectionProps {
   initialPages?: string;
   initialFeatures?: string[];
   initialTimeline?: string;
+  onOpenEmailModal?: (data?: { subject?: string; body?: string; clientName?: string; clientEmail?: string }) => void;
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({
   initialProjectType = 'Business Website',
   initialPages = '2 to 4 Pages',
-  initialTimeline = 'Standard (7–10 Days)'
+  initialTimeline = 'Standard (7–10 Days)',
+  onOpenEmailModal
 }) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -32,6 +37,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [submittedMessage, setSubmittedMessage] = useState<string | null>(null);
+  const [copiedInquiry, setCopiedInquiry] = useState(false);
 
   // Update states if props change from scope estimator
   React.useEffect(() => {
@@ -96,9 +102,49 @@ ${details.trim() ? `Project Notes / Requirements: ${details.trim()}` : ''}`;
 
     const message = constructProjectSummary();
     const subject = `Website Project Inquiry: ${projectType} — ${fullName.trim()}`;
-    const url = getMailtoUrl(subject, message);
-    window.location.href = url;
-    setSubmittedMessage('Opening your email client with your project specifications.');
+    
+    if (onOpenEmailModal) {
+      onOpenEmailModal({
+        subject,
+        body: message,
+        clientName: fullName.trim(),
+        clientEmail: email.trim()
+      });
+    } else {
+      window.open(getGmailComposeUrl(subject, message), '_blank');
+    }
+
+    setSubmittedMessage('Your project brief is ready! Choose your email app in the dialog to dispatch.');
+  };
+
+  const handleQuickEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onOpenEmailModal) {
+      onOpenEmailModal();
+    } else {
+      window.open(getGmailComposeUrl(), '_blank');
+    }
+  };
+
+  const handleCopyInquiry = async () => {
+    const message = constructProjectSummary();
+    const fullText = `To: ${SITE_CONFIG.contact.emailAddress}\nSubject: Website Project Inquiry: ${projectType}\n\n${message}`;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(fullText);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = fullText;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      setCopiedInquiry(true);
+      setTimeout(() => setCopiedInquiry(false), 3000);
+    } catch {
+      // Fallback
+    }
   };
 
   return (
@@ -129,27 +175,48 @@ ${details.trim() ? `Project Notes / Requirements: ${details.trim()}` : ''}`;
               <span>WhatsApp Us Directly</span>
             </a>
 
-            <a
-              href={getMailtoUrl()}
+            <button
+              type="button"
+              onClick={handleQuickEmail}
               id="contact-standalone-email-btn"
-              className="px-4 py-2.5 rounded-lg bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 text-neutral-200 hover:text-white font-semibold text-xs sm:text-sm flex items-center gap-2 transition-colors"
+              className="px-4 py-2.5 rounded-lg bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 hover:border-emerald-500/40 text-neutral-200 hover:text-white font-semibold text-xs sm:text-sm flex items-center gap-2 transition-colors cursor-pointer"
             >
               <Mail className="w-4 h-4 text-emerald-400" />
               <span>Email Us Directly</span>
-            </a>
+            </button>
           </div>
         </div>
 
         {/* Single Scrollable Form Card */}
         <div className="rounded-2xl bg-neutral-950 border border-neutral-800 p-6 sm:p-10 shadow-2xl shadow-black relative">
           {submittedMessage && (
-            <div className="mb-6 p-4 rounded-xl bg-emerald-950/60 border border-emerald-800/70 text-emerald-300 text-xs sm:text-sm flex items-start gap-3">
-              <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-400 mt-0.5" />
-              <div>
-                <p className="font-semibold">{submittedMessage}</p>
-                <p className="text-xs text-emerald-400/80 mt-1">
-                  You can also click the quick action buttons above anytime if your browser blocked popups.
-                </p>
+            <div className="mb-6 p-4 rounded-xl bg-emerald-950/60 border border-emerald-800/70 text-emerald-300 text-xs sm:text-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-400 mt-0.5" />
+                <div>
+                  <p className="font-semibold">{submittedMessage}</p>
+                  <p className="text-xs text-emerald-400/80 mt-0.5">
+                    Didn't open? Use the quick actions below to send or copy your project inquiry:
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
+                <button
+                  type="button"
+                  onClick={handleSendViaEmail}
+                  className="px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-300 text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Mail className="w-3.5 h-3.5" />
+                  <span>Email Options</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleCopyInquiry}
+                  className="px-3 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 text-neutral-200 text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
+                >
+                  {copiedInquiry ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-neutral-400" />}
+                  <span>{copiedInquiry ? 'Copied!' : 'Copy Text'}</span>
+                </button>
               </div>
             </div>
           )}

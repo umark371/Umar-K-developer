@@ -1,8 +1,12 @@
 import React from 'react';
-import { SITE_CONFIG, getWhatsAppUrl, getMailtoUrl } from '../config/siteConfig';
+import { SITE_CONFIG, getWhatsAppUrl, getGmailComposeUrl } from '../config/siteConfig';
 import { Code2, MessageCircle, Mail, ArrowUp } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenEmailModal?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenEmailModal }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -12,6 +16,15 @@ export const Footer: React.FC = () => {
     const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleEmailClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onOpenEmailModal) {
+      onOpenEmailModal();
+    } else {
+      window.open(getGmailComposeUrl(), '_blank');
     }
   };
 
@@ -45,14 +58,15 @@ export const Footer: React.FC = () => {
                 <span>WhatsApp Us</span>
               </a>
 
-              <a
-                href={getMailtoUrl()}
+              <button
+                type="button"
+                onClick={handleEmailClick}
                 id="footer-email-btn"
-                className="px-3.5 py-2 text-xs font-semibold text-neutral-300 hover:text-white bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 hover:border-neutral-700 rounded-lg flex items-center gap-2 transition-colors"
+                className="px-3.5 py-2 text-xs font-semibold text-neutral-300 hover:text-white bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 hover:border-emerald-500/40 rounded-lg flex items-center gap-2 transition-colors cursor-pointer"
               >
                 <Mail className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Email Us</span>
-              </a>
+              </button>
             </div>
           </div>
 

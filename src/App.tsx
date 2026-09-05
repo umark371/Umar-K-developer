@@ -25,6 +25,7 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { CookieBanner } from './components/CookieBanner';
+import { EmailModal } from './components/EmailModal';
 
 export default function App() {
   // Form pre-fill state from services or scope estimator
@@ -32,6 +33,25 @@ export default function App() {
   const [selectedPageCount, setSelectedPageCount] = useState<string>('2 to 4 Pages');
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
   const [selectedTimeline, setSelectedTimeline] = useState<string>('Standard (7–10 Days)');
+
+  // Email modal state
+  const [emailModalOpen, setEmailModalOpen] = useState<boolean>(false);
+  const [emailModalData, setEmailModalData] = useState<{
+    subject?: string;
+    body?: string;
+    clientName?: string;
+    clientEmail?: string;
+  } | undefined>(undefined);
+
+  const handleOpenEmailModal = (data?: {
+    subject?: string;
+    body?: string;
+    clientName?: string;
+    clientEmail?: string;
+  }) => {
+    setEmailModalData(data);
+    setEmailModalOpen(true);
+  };
 
   const handleSelectServiceForQuote = (serviceTitle: string) => {
     // Map service title to project type
@@ -105,17 +125,25 @@ export default function App() {
           initialPages={selectedPageCount}
           initialFeatures={selectedFeatures}
           initialTimeline={selectedTimeline}
+          onOpenEmailModal={handleOpenEmailModal}
         />
       </main>
 
       {/* 9. Footer */}
-      <Footer />
+      <Footer onOpenEmailModal={() => handleOpenEmailModal()} />
 
       {/* Floating Action Button */}
       <FloatingWhatsApp />
 
       {/* Cookie Consent Notice */}
       <CookieBanner />
+
+      {/* Direct Email Dispatch Dialog */}
+      <EmailModal
+        isOpen={emailModalOpen}
+        onClose={() => setEmailModalOpen(false)}
+        inquiryData={emailModalData}
+      />
     </div>
   );
 }
