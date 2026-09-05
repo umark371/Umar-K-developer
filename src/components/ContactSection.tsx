@@ -8,8 +8,16 @@ import {
   ShieldCheck,
   ExternalLink,
   Copy,
-  Check
+  Check,
+  FileSpreadsheet
 } from 'lucide-react';
+import { GoogleSheetsSyncCard } from './GoogleSheetsSyncCard';
+import { 
+  appendInquiryToSheet, 
+  createInquirySpreadsheet, 
+  getSpreadsheetDetails 
+} from '../services/googleSheets';
+import { getAccessToken, googleSignIn } from '../services/firebaseAuth';
 
 interface ContactSectionProps {
   initialProjectType?: string;
@@ -37,7 +45,15 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [submittedMessage, setSubmittedMessage] = useState<string | null>(null);
+  const [sheetSyncSuccess, setSheetSyncSuccess] = useState<{ url: string; rows: number } | null>(null);
+  const [isSavingToSheet, setIsSavingToSheet] = useState(false);
   const [copiedInquiry, setCopiedInquiry] = useState(false);
+
+  // Active configured spreadsheet ID
+  const [activeSpreadsheetId, setActiveSpreadsheetId] = useState<string>(() => {
+    return localStorage.getItem('agency_inquiry_sheet_id') || '';
+  });
+  const [activeSheetTab, setActiveSheetTab] = useState<string>('Client Inquiries');
 
   // Update states if props change from scope estimator
   React.useEffect(() => {
@@ -144,6 +160,65 @@ ${details.trim() ? `Project Notes / Requirements: ${details.trim()}` : ''}`;
       setTimeout(() => setCopiedInquiry(false), 3000);
     } catch {
       // Fallback
+    }
+  };
+
+  const handleSaveToGoogleSheets = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    setIsSavingToSheet(true);
+    setSheetSyncSuccess(null);
+
+    try {
+      let token = await getAccessToken();
+      if (!token) {
+        // Trigger Google Sign-In with spreadsheets scope
+        const authRes = await googleSignIn();
+        if (!authRes?.accessToken) {
+          throw new Error('Google Sign-In is required to record inquiries into your spreadsheet.');
+        }
+        token = authRes.accessToken;
+      }
+
+      // Check if we have an active spreadsheet, or create one
+      let sheetId = activeSpreadsheetId;
+      let sheetTab = activeSheetTab;
+
+      if (!sheetId) {
+        const created = await createInquirySpreadsheet('Client Inquiries — Digital Developer Agency');
+        sheetId = created.spreadsheetId;
+        sheetTab = created.sheetTitle;
+        setActiveSpreadsheetId(sheetId);
+        setActiveSheetTab(sheetTab);
+        localStorage.setItem('agency_inquiry_sheet_id', sheetId);
+      }
+
+      const appendRes = await appendInquiryToSheet(
+        sheetId,
+        {
+          fullName,
+          email,
+          projectType,
+          pageCount,
+          timeline,
+          budgetRange,
+          details,
+        },
+        sheetTab
+      );
+
+      setSheetSyncSuccess({
+        url: appendRes.spreadsheetUrl,
+        rows: appendRes.updatedRows,
+      });
+
+      setSubmittedMessage(`Successfully recorded inquiry for "${fullName.trim()}" into Google Sheets!`);
+    } catch (err: any) {
+      console.error('Save to Sheets error:', err);
+      alert(`Google Sheets Sync Error: ${err?.message || 'Unable to record to sheet'}`);
+    } finally {
+      setIsSavingToSheet(false);
     }
   };
 
@@ -372,22 +447,51 @@ ${details.trim() ? `Project Notes / Requirements: ${details.trim()}` : ''}`;
               <button
                 type="submit"
                 id="contact-submit-whatsapp-btn"
-                className="flex-1 py-3.5 px-6 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm shadow-md shadow-emerald-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="flex-1 py-3.5 px-5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm shadow-md shadow-emerald-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <MessageCircle className="w-4 h-4 fill-black/20" />
-                <span>Send Inquiry to WhatsApp</span>
+                <span>Send via WhatsApp</span>
               </button>
 
               <button
                 type="button"
                 onClick={handleSendViaEmail}
                 id="contact-submit-email-btn"
-                className="flex-1 py-3.5 px-6 rounded-lg bg-neutral-900 hover:bg-neutral-850 text-neutral-200 hover:text-white font-semibold text-sm border border-neutral-800 hover:border-emerald-500/40 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                className="flex-1 py-3.5 px-5 rounded-lg bg-neutral-900 hover:bg-neutral-850 text-neutral-200 hover:text-white font-semibold text-xs sm:text-sm border border-neutral-800 hover:border-emerald-500/40 transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Mail className="w-4 h-4 text-emerald-400" />
-                <span>Send via Email Client</span>
+                <span>Send via Email</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={handleSaveToGoogleSheets}
+                disabled={isSavingToSheet}
+                id="contact-submit-sheets-btn"
+                className="flex-1 py-3.5 px-5 rounded-lg bg-emerald-950/80 hover:bg-emerald-900/80 text-emerald-300 hover:text-emerald-200 border border-emerald-800/80 hover:border-emerald-500 font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              >
+                <FileSpreadsheet className={`w-4 h-4 ${isSavingToSheet ? 'animate-bounce text-emerald-300' : 'text-emerald-400'}`} />
+                <span>{isSavingToSheet ? 'Saving...' : 'Save to Google Sheets'}</span>
               </button>
             </div>
+
+            {sheetSyncSuccess && (
+              <div className="p-3.5 rounded-lg bg-emerald-950/70 border border-emerald-800 text-emerald-300 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Inquiry recorded into Google Spreadsheet row successfully!</span>
+                </div>
+                <a
+                  href={sheetSyncSuccess.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded bg-emerald-500 text-black font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-emerald-400 transition-colors self-start sm:self-auto"
+                >
+                  <span>Open in Google Sheets</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            )}
 
             <div className="text-center pt-2">
               <p className="text-[11px] text-neutral-400 flex items-center justify-center gap-1.5">
@@ -396,6 +500,14 @@ ${details.trim() ? `Project Notes / Requirements: ${details.trim()}` : ''}`;
               </p>
             </div>
           </form>
+
+          {/* Integrated Google Sheets Synchronizer & Inquiry Manager */}
+          <GoogleSheetsSyncCard
+            onSpreadsheetConfigured={(id, tab) => {
+              setActiveSpreadsheetId(id);
+              if (tab) setActiveSheetTab(tab);
+            }}
+          />
         </div>
       </div>
     </section>
