@@ -60,19 +60,19 @@ export const SERVICES_DATA: ServiceItem[] = [
     icon: 'Palette'
   },
   {
-    id: 'blogger-websites',
-    title: 'Blogger Websites',
-    shortDesc: 'Custom Blogger XML templates, responsive theme engineering, widget integrations, and speed optimization.',
-    fullDesc: 'Blogger is a powerhouse of free, reliable Google hosting with zero server maintenance. We handcraft clean, modern Blogger XML themes that break free of generic templates—offering lightning-fast loading, full responsive flexibility, and clean schema markup.',
+    id: 'blog-platforms',
+    title: 'Blog & Content Platforms',
+    shortDesc: 'Lightning-fast editorial layouts, publishing systems, and article platforms built for writers and publications.',
+    fullDesc: 'We develop custom publishing architectures engineered for content creators, newsletters, publications, and corporate blogs. Featuring distraction-free typography, dynamic category filtering, fast asset loading, and structured article schema markup.',
     features: [
-      '100% compliant Blogger XML markup (closed tags, CDATA safe, error-free)',
-      'Modern, magazine, editorial, or portfolio layout paradigms',
-      'Custom widget integration (recent posts, featured slider, newsletter)',
-      'AdSense-ready placements without degrading user experience'
+      'Semantic article layouts with distraction-free reading typography',
+      'Categorized archives, tag filtering, and dynamic search',
+      'Newsletter capture, author bio sections, and social sharing',
+      'Sub-second article page load speeds for high reader retention'
     ],
-    deliverables: ['Complete Blogger XML File', 'Installation & Setup Guide', 'Custom Widget Styling', 'AdSense Optimization'],
-    icon: 'Code2',
-    badge: 'Specialized'
+    deliverables: ['Custom Editorial Layout', 'Tag & Archive Templates', 'Newsletter Integration', 'Article Schema Markup'],
+    icon: 'Layers',
+    badge: 'Content'
   },
   {
     id: 'custom-web-solutions',

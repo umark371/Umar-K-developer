@@ -12,7 +12,7 @@ export interface ServiceItem {
 export interface PortfolioProject {
   id: string;
   title: string;
-  category: 'Business' | 'Landing Pages' | 'E-Commerce' | 'Blogger' | 'Custom Solutions' | 'Portfolio';
+  category: 'Business' | 'Landing Pages' | 'E-Commerce' | 'Editorial' | 'Custom Solutions' | 'Portfolio';
   summary: string;
   challenge: string;
   solution: string;

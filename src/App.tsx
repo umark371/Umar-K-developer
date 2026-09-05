@@ -10,7 +10,7 @@
  * 6. Pricing factors & Interactive Scope Estimator
  * 7. FAQ Accordion for common client inquiries
  * 8. Contact section with validated form, pre-filled WhatsApp/Email routing (private credentials)
- * 9. Footer, Floating WhatsApp button, Cookie notice, and complete Blogger XML / HTML exporter
+ * 9. Footer, Floating WhatsApp button, and Cookie notice
  */
 
 import React, { useState } from 'react';
@@ -25,11 +25,8 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { CookieBanner } from './components/CookieBanner';
-import { BloggerCodeModal } from './components/BloggerCodeModal';
 
 export default function App() {
-  const [bloggerModalOpen, setBloggerModalOpen] = useState(false);
-
   // Form pre-fill state from services or scope estimator
   const [selectedProjectType, setSelectedProjectType] = useState<string>('Business Website');
   const [selectedPageCount, setSelectedPageCount] = useState<string>('2 to 4 Pages');
@@ -44,8 +41,8 @@ export default function App() {
     } else if (serviceTitle.includes('Commerce')) {
       setSelectedProjectType('E-Commerce Store');
       setSelectedPageCount('5 to 8 Pages');
-    } else if (serviceTitle.includes('Blogger')) {
-      setSelectedProjectType('Blogger Website');
+    } else if (serviceTitle.includes('Blog') || serviceTitle.includes('Content')) {
+      setSelectedProjectType('Blog & Content Platform');
       setSelectedPageCount('2 to 4 Pages');
     } else if (serviceTitle.includes('Portfolio')) {
       setSelectedProjectType('Portfolio Website');
@@ -78,9 +75,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500/20 selection:text-cyan-300">
+    <div className="min-h-screen bg-black text-neutral-100 flex flex-col font-sans selection:bg-emerald-500/25 selection:text-emerald-300">
       {/* 1. Header */}
-      <Header onOpenBloggerModal={() => setBloggerModalOpen(true)} />
+      <Header />
 
       {/* Main Content Sections */}
       <main className="flex-1">
@@ -112,19 +109,13 @@ export default function App() {
       </main>
 
       {/* 9. Footer */}
-      <Footer onOpenBloggerModal={() => setBloggerModalOpen(true)} />
+      <Footer />
 
       {/* Floating Action Button */}
       <FloatingWhatsApp />
 
       {/* Cookie Consent Notice */}
       <CookieBanner />
-
-      {/* Blogger XML & Standalone HTML Template Exporter */}
-      <BloggerCodeModal
-        isOpen={bloggerModalOpen}
-        onClose={() => setBloggerModalOpen(false)}
-      />
     </div>
   );
 }

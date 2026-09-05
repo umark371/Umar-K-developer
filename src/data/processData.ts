@@ -13,7 +13,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     stepNumber: 2,
     title: 'Discussion',
     shortDescription: 'Direct consultation via WhatsApp or email to clarify technical preferences and timeline.',
-    details: 'We discuss technical trade-offs honestly—recommending the right platform (e.g. custom HTML/JS vs. Blogger template vs. CMS) and defining exact milestones so there are never any surprises.',
+    details: 'We discuss technical trade-offs honestly—recommending the right technical architecture and defining exact milestones so there are never any surprises.',
     outcome: 'Agreed timeline, fixed milestones & verified specs',
     icon: 'MessagesSquare'
   },
@@ -52,8 +52,8 @@ export const PROCESS_STEPS: ProcessStep[] = [
   {
     stepNumber: 7,
     title: 'Delivery',
-    shortDescription: 'Deployment to your live domain, Blogger installation, or clean code handover.',
-    details: 'We handle live domain connection, SSL verification, Blogger XML installation (if applicable), Google Search Console sitemap submission, and provide all source files.',
+    shortDescription: 'Deployment to your live domain, web server, or clean code handover.',
+    details: 'We handle live domain connection, SSL verification, production hosting setup, Google Search Console sitemap submission, and provide all organized source files.',
     outcome: 'Live published website & organized asset handover',
     icon: 'Send'
   },

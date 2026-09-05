@@ -24,7 +24,7 @@ export interface SiteConfig {
 export const SITE_CONFIG: SiteConfig = {
   brandName: 'Digital Developer',
   tagline: 'Custom Website Development Engineered for Growth & Performance',
-  shortBio: 'Professional website development agency delivering high-performance, handcrafted web solutions, landing pages, e-commerce, and custom Blogger templates built strictly to your specifications.',
+  shortBio: 'Professional website development agency delivering high-performance, handcrafted web solutions, landing pages, e-commerce stores, and custom web applications built strictly to your specifications.',
   contact: {
     whatsappNumber: '923467237420',
     emailAddress: 'umarkwork.pk@gmail.com',

@@ -15,8 +15,8 @@ export const PORTFOLIO_DATA: PortfolioProject[] = [
       'Integrated direct WhatsApp & email quote routing'
     ],
     techStack: ['HTML5 / Tailwind', 'Vanilla JavaScript', 'SEO Schema', 'WhatsApp API Integration'],
-    imagePlaceholderColor: 'from-blue-900/40 to-slate-900/80',
-    accentColor: '#3b82f6'
+    imagePlaceholderColor: 'from-emerald-950/50 to-neutral-950',
+    accentColor: '#10b981'
   },
   {
     id: 'nordic-living',
@@ -32,7 +32,7 @@ export const PORTFOLIO_DATA: PortfolioProject[] = [
       'Zero external tracking bloat for maximum page speed'
     ],
     techStack: ['Responsive Grid', 'Vanilla State Engine', 'WebP Asset Pipeline', 'Instant Order Routing'],
-    imagePlaceholderColor: 'from-emerald-950/40 to-slate-900/80',
+    imagePlaceholderColor: 'from-emerald-950/70 to-neutral-950',
     accentColor: '#10b981'
   },
   {
@@ -49,25 +49,25 @@ export const PORTFOLIO_DATA: PortfolioProject[] = [
       'Achieved a 9.4% lead conversion rate on early traffic'
     ],
     techStack: ['Conversion Architecture', 'Lightweight Micro-Interactions', 'Interactive DOM Sliders'],
-    imagePlaceholderColor: 'from-cyan-950/40 to-slate-900/80',
-    accentColor: '#06b6d4'
+    imagePlaceholderColor: 'from-emerald-950/60 to-neutral-950',
+    accentColor: '#34d399'
   },
   {
-    id: 'tech-chronicle-blogger',
-    title: 'The Tech Chronicle',
-    category: 'Blogger',
-    summary: 'Bespoke, magazine-grade Blogger XML template with responsive dark mode and AdSense slots.',
-    challenge: 'A prominent tech publication wanted to remain on Google Blogger for zero-cost hosting and infinite traffic resilience, but needed a premium editorial look that did not resemble a default template.',
-    solution: 'Authored an XML-valid, clean custom Blogger theme with modern typography, sticky reading progress, automated related posts, and responsive ad containers.',
+    id: 'tech-chronicle-magazine',
+    title: 'The Tech Chronicle Magazine',
+    category: 'Editorial',
+    summary: 'Bespoke editorial magazine platform with responsive dark mode, fast reading experience, and article categorization.',
+    challenge: 'A growing tech publication needed a fast, high-traffic editorial website with a premium reading experience, zero layout jank, and sub-second load times.',
+    solution: 'Engineered a modern, lightweight editorial platform with clean typography, reading time estimators, and instant category filters.',
     keyFeatures: [
-      '100% compliant Blogger XML syntax with clean CDATA tags',
-      'Custom categorized widget loops and trending article cards',
+      'Custom categorized article loops and trending stories',
       'Built-in reading time estimator and social share triggers',
-      '99/100 Google PageSpeed Insights score on mobile'
+      'Distraction-free reading view with sticky header progress',
+      '99/100 Google PageSpeed Insights mobile score'
     ],
-    techStack: ['Blogger XML Engine', 'CSS3 Variables', 'Vanilla JavaScript', 'Google AdSense Ready'],
-    imagePlaceholderColor: 'from-amber-950/40 to-slate-900/80',
-    accentColor: '#f59e0b'
+    techStack: ['Modern Semantic Web', 'CSS Variables', 'Vanilla JavaScript', 'SEO Article Schema'],
+    imagePlaceholderColor: 'from-emerald-950/80 to-neutral-950',
+    accentColor: '#10b981'
   },
   {
     id: 'elena-architect',
@@ -83,8 +83,8 @@ export const PORTFOLIO_DATA: PortfolioProject[] = [
       'Direct project consultation booking interface'
     ],
     techStack: ['Modern CSS Grid', 'IntersectionObserver Lazy Loading', 'Accessible Dialog UX'],
-    imagePlaceholderColor: 'from-stone-900/40 to-slate-900/80',
-    accentColor: '#a8a29e'
+    imagePlaceholderColor: 'from-neutral-900 to-neutral-950',
+    accentColor: '#34d399'
   },
   {
     id: 'solar-quote-calc',
@@ -100,7 +100,7 @@ export const PORTFOLIO_DATA: PortfolioProject[] = [
       'Lightweight vanilla JavaScript with no bloated external dependencies'
     ],
     techStack: ['Vanilla JavaScript', 'Custom Math Engine', 'Inline Form Validation', 'Instant WhatsApp Payload'],
-    imagePlaceholderColor: 'from-indigo-950/40 to-slate-900/80',
-    accentColor: '#6366f1'
+    imagePlaceholderColor: 'from-emerald-950/50 to-neutral-950',
+    accentColor: '#10b981'
   }
 ];

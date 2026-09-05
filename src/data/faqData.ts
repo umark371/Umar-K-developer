@@ -7,14 +7,14 @@ export const FAQ_DATA: FaqItem[] = [
     answer: 'Every website has distinct requirements: a 1-page landing page requires far different engineering than a 10-page e-commerce store with custom variant filtering and automated WhatsApp order routing. We price transparently based strictly on your project’s page count, custom features, timeline, and asset readiness. Use our Project Scope Estimator above to get a clear indication and message us for a firm quote.'
   },
   {
-    category: 'Blogger Websites',
-    question: 'Can you build a professional modern website on Google Blogger?',
-    answer: 'Yes, absolutely. Google Blogger offers 100% free, reliable Google cloud hosting with free SSL, zero server maintenance, and virtually infinite traffic capacity. With our custom-engineered XML templates, we bypass default clunky layouts to deliver lightning-fast, modern responsive websites that look and feel like bespoke modern web applications.'
+    category: 'Technology & Platforms',
+    question: 'What technologies and frameworks do you build websites with?',
+    answer: 'We build with modern, high-performance web standards including modern HTML5, CSS3/Tailwind CSS, and vanilla TypeScript/JavaScript or modern frameworks depending on your project needs. Every build is engineered with zero bloat, ensuring maximum PageSpeed scores, fast indexing, and effortless long-term maintainability.'
   },
   {
     category: 'Timeline',
     question: 'How long does a website development project usually take?',
-    answer: 'A focused landing page or Blogger theme customization typically takes 3 to 6 business days once content and requirements are finalized. Multi-page business websites and custom web solutions usually take between 7 to 15 business days depending on page volume and custom interactive features.'
+    answer: 'A focused landing page or business website typically takes 3 to 6 business days once content and requirements are finalized. Multi-page e-commerce storefronts and custom web solutions usually take between 7 to 15 business days depending on page volume and custom interactive features.'
   },
   {
     category: 'Domain & Hosting',

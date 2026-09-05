@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { SITE_CONFIG, getWhatsAppUrl, getMailtoUrl } from '../config/siteConfig';
+import { getWhatsAppUrl } from '../config/siteConfig';
 import { 
   Calculator, 
-  HelpCircle, 
   Check, 
   MessageCircle, 
-  Mail, 
   ArrowRight, 
   Sparkles,
   Layers,
@@ -36,7 +34,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onApplyEstimated
     'Responsive Mobile-First Design',
     'WhatsApp Direct Inquiry Routing',
     'Semantic SEO & Core Web Vitals',
-    'Custom Blogger XML Theme',
+    'Custom Blog & Editorial Layout',
     'Interactive Quote / Calculator Logic',
     'Product Catalog & WhatsApp Ordering',
     'Custom Lead Intake Validation'
@@ -72,77 +70,77 @@ Please provide a custom proposal and quote.`;
   };
 
   return (
-    <section id="pricing" className="py-20 sm:py-28 border-t border-slate-900 bg-slate-950 relative">
+    <section id="pricing" className="py-20 sm:py-28 border-t border-neutral-900 bg-black relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-950/60 border border-amber-800/50 px-3 py-1 rounded-full inline-block mb-3">
+          <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-3.5 py-1 rounded-full inline-block mb-3">
             Transparent Pricing
           </span>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
             Custom Proposals Based on Your Exact Scope
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
             Every business has distinct needs. Instead of inflexible generic packages or inflated retainers, we price fairly according to your exact page count, technical complexity, custom features, and delivery timeline.
           </p>
         </div>
 
         {/* 4 Cost Factor Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
-          <div className="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
-            <div className="w-8 h-8 rounded-lg bg-blue-950/60 border border-blue-800/50 flex items-center justify-center text-blue-400 mb-3">
+          <div className="p-5 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-emerald-500/40 transition-colors">
+            <div className="w-8 h-8 rounded-lg bg-neutral-950 border border-neutral-800 flex items-center justify-center text-emerald-400 mb-3">
               <Layers className="w-4 h-4" />
             </div>
             <h3 className="text-sm font-bold text-white mb-1.5">Page Volume</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-neutral-400 leading-relaxed">
               From a single high-impact conversion landing page to a 15-page corporate site with dedicated service silos.
             </p>
           </div>
 
-          <div className="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
-            <div className="w-8 h-8 rounded-lg bg-cyan-950/60 border border-cyan-800/50 flex items-center justify-center text-cyan-400 mb-3">
+          <div className="p-5 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-emerald-500/40 transition-colors">
+            <div className="w-8 h-8 rounded-lg bg-neutral-950 border border-neutral-800 flex items-center justify-center text-emerald-400 mb-3">
               <Code2 className="w-4 h-4" />
             </div>
             <h3 className="text-sm font-bold text-white mb-1.5">Custom Functionality</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Interactive calculators, custom Blogger XML modules, product filtering, or multi-field intake validations.
+            <p className="text-xs text-neutral-400 leading-relaxed">
+              Interactive calculators, dynamic lead capture flows, product catalogs, or multi-field intake validations.
             </p>
           </div>
 
-          <div className="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
-            <div className="w-8 h-8 rounded-lg bg-emerald-950/60 border border-emerald-800/50 flex items-center justify-center text-emerald-400 mb-3">
+          <div className="p-5 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-emerald-500/40 transition-colors">
+            <div className="w-8 h-8 rounded-lg bg-neutral-950 border border-neutral-800 flex items-center justify-center text-emerald-400 mb-3">
               <Clock className="w-4 h-4" />
             </div>
             <h3 className="text-sm font-bold text-white mb-1.5">Delivery Timeline</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-neutral-400 leading-relaxed">
               Standard steady milestones (7–14 days) or prioritized turnaround for urgent business product launches.
             </p>
           </div>
 
-          <div className="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
-            <div className="w-8 h-8 rounded-lg bg-amber-950/60 border border-amber-800/50 flex items-center justify-center text-amber-400 mb-3">
+          <div className="p-5 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-emerald-500/40 transition-colors">
+            <div className="w-8 h-8 rounded-lg bg-neutral-950 border border-neutral-800 flex items-center justify-center text-emerald-400 mb-3">
               <Sparkles className="w-4 h-4" />
             </div>
             <h3 className="text-sm font-bold text-white mb-1.5">Design &amp; Assets</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-neutral-400 leading-relaxed">
               Whether you provide full branding assets &amp; copy or need assistance structuring messaging and layout styling.
             </p>
           </div>
         </div>
 
         {/* Interactive Scope & Quote Configurator */}
-        <div className="max-w-4xl mx-auto rounded-2xl bg-slate-900 border border-slate-800 p-6 sm:p-8 shadow-2xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-slate-800 gap-4">
+        <div className="max-w-4xl mx-auto rounded-2xl bg-neutral-950 border border-neutral-800 p-6 sm:p-8 shadow-2xl shadow-black">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-neutral-800 gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+              <div className="w-10 h-10 rounded-xl bg-emerald-950/60 border border-emerald-800/60 flex items-center justify-center text-emerald-400">
                 <Calculator className="w-5 h-5" />
               </div>
               <div>
                 <h3 className="text-lg font-bold text-white">Interactive Scope Estimator</h3>
-                <p className="text-xs text-slate-400">Select your preferences to outline your project requirements.</p>
+                <p className="text-xs text-neutral-400">Select your preferences to outline your project requirements.</p>
               </div>
             </div>
-            <span className="text-xs font-semibold text-cyan-400 bg-cyan-950/50 border border-cyan-800/50 px-3 py-1 rounded-full self-start sm:self-auto">
+            <span className="text-xs font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-3.5 py-1 rounded-full self-start sm:self-auto">
               Fast Response Guaranteed
             </span>
           </div>
@@ -150,19 +148,19 @@ Please provide a custom proposal and quote.`;
           <div className="space-y-6">
             {/* 1. Website Type */}
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-300 block mb-2.5">
+              <label className="text-xs font-bold uppercase tracking-wider text-neutral-300 block mb-2.5">
                 1. Select Website Type
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {['Landing Page', 'Business Website', 'E-Commerce Store', 'Blogger Website'].map((type) => (
+                {['Landing Page', 'Business Website', 'E-Commerce Store', 'Custom Web App'].map((type) => (
                   <button
                     key={type}
                     type="button"
                     onClick={() => setSelectedType(type)}
-                    className={`py-2 px-3 text-xs font-semibold rounded-lg border text-left transition-all cursor-pointer ${
+                    className={`py-2.5 px-3 text-xs font-semibold rounded-lg border text-left transition-all cursor-pointer ${
                       selectedType === type
-                        ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
-                        : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-700'
+                        ? 'bg-emerald-500 text-black font-bold border-emerald-400 shadow-sm shadow-emerald-500/20'
+                        : 'bg-neutral-900 text-neutral-300 border-neutral-800 hover:border-neutral-700'
                     }`}
                   >
                     {type}
@@ -173,7 +171,7 @@ Please provide a custom proposal and quote.`;
 
             {/* 2. Number of Pages */}
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-300 block mb-2.5">
+              <label className="text-xs font-bold uppercase tracking-wider text-neutral-300 block mb-2.5">
                 2. Approximate Page Count
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -182,10 +180,10 @@ Please provide a custom proposal and quote.`;
                     key={pages}
                     type="button"
                     onClick={() => setSelectedPages(pages)}
-                    className={`py-2 px-3 text-xs font-semibold rounded-lg border text-center transition-all cursor-pointer ${
+                    className={`py-2.5 px-3 text-xs font-semibold rounded-lg border text-center transition-all cursor-pointer ${
                       selectedPages === pages
-                        ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
-                        : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-700'
+                        ? 'bg-emerald-500 text-black font-bold border-emerald-400 shadow-sm shadow-emerald-500/20'
+                        : 'bg-neutral-900 text-neutral-300 border-neutral-800 hover:border-neutral-700'
                     }`}
                   >
                     {pages}
@@ -196,7 +194,7 @@ Please provide a custom proposal and quote.`;
 
             {/* 3. Key Feature Checkboxes */}
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-300 block mb-2.5">
+              <label className="text-xs font-bold uppercase tracking-wider text-neutral-300 block mb-2.5">
                 3. Desired Features &amp; Integrations
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -209,12 +207,12 @@ Please provide a custom proposal and quote.`;
                       onClick={() => toggleFeature(feat)}
                       className={`p-2.5 rounded-lg border text-left text-xs font-medium flex items-center gap-2.5 transition-all cursor-pointer ${
                         isChecked
-                          ? 'bg-blue-950/40 text-blue-200 border-blue-700/60'
-                          : 'bg-slate-950 text-slate-400 border-slate-800 hover:border-slate-700'
+                          ? 'bg-emerald-950/40 text-emerald-200 border-emerald-600/70'
+                          : 'bg-neutral-900 text-neutral-400 border-neutral-800 hover:border-neutral-700'
                       }`}
                     >
                       <div className={`w-4 h-4 rounded flex items-center justify-center text-xs font-bold shrink-0 ${
-                        isChecked ? 'bg-blue-600 text-white' : 'border border-slate-700 bg-slate-900'
+                        isChecked ? 'bg-emerald-500 text-black' : 'border border-neutral-700 bg-neutral-950'
                       }`}>
                         {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
                       </div>
@@ -227,7 +225,7 @@ Please provide a custom proposal and quote.`;
 
             {/* 4. Timeline */}
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-300 block mb-2.5">
+              <label className="text-xs font-bold uppercase tracking-wider text-neutral-300 block mb-2.5">
                 4. Target Timeline
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -240,10 +238,10 @@ Please provide a custom proposal and quote.`;
                     key={time}
                     type="button"
                     onClick={() => setSelectedTimeline(time)}
-                    className={`py-2 px-3 text-xs font-semibold rounded-lg border text-center transition-all cursor-pointer ${
+                    className={`py-2.5 px-3 text-xs font-semibold rounded-lg border text-center transition-all cursor-pointer ${
                       selectedTimeline === time
-                        ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
-                        : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-700'
+                        ? 'bg-emerald-500 text-black font-bold border-emerald-400 shadow-sm shadow-emerald-500/20'
+                        : 'bg-neutral-900 text-neutral-300 border-neutral-800 hover:border-neutral-700'
                     }`}
                   >
                     {time}
@@ -253,15 +251,15 @@ Please provide a custom proposal and quote.`;
             </div>
 
             {/* Summary Box & CTAs */}
-            <div className="pt-6 border-t border-slate-800 bg-slate-950/80 p-5 rounded-xl border border-slate-800/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+            <div className="pt-6 border-t border-neutral-800 bg-neutral-900/60 p-5 rounded-xl border border-neutral-800/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
               <div>
-                <span className="text-[11px] uppercase tracking-wider font-bold text-slate-400 block mb-1">
+                <span className="text-[11px] uppercase tracking-wider font-bold text-neutral-400 block mb-1">
                   Configured Scope:
                 </span>
                 <div className="text-sm font-bold text-white">
                   {selectedType} • {selectedPages} • {selectedTimeline.split(' ')[0]}
                 </div>
-                <div className="text-xs text-slate-400 mt-0.5">
+                <div className="text-xs text-neutral-400 mt-0.5">
                   {selectedFeatures.length} features selected
                 </div>
               </div>
@@ -271,10 +269,10 @@ Please provide a custom proposal and quote.`;
                   type="button"
                   onClick={handleApplyToForm}
                   id="pricing-apply-to-form-btn"
-                  className="px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+                  className="px-4 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/20 cursor-pointer"
                 >
                   <span>Apply to Contact Form</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
                 </button>
 
                 <a
@@ -282,9 +280,9 @@ Please provide a custom proposal and quote.`;
                   target="_blank"
                   rel="noopener noreferrer"
                   id="pricing-whatsapp-quote-btn"
-                  className="px-4 py-2.5 rounded-lg bg-emerald-950/70 hover:bg-emerald-900/80 border border-emerald-800 text-emerald-300 font-semibold text-xs transition-colors flex items-center justify-center gap-1.5"
+                  className="px-4 py-2.5 rounded-lg bg-neutral-950 hover:bg-neutral-900 border border-emerald-900/80 hover:border-emerald-700 text-emerald-400 font-semibold text-xs transition-colors flex items-center justify-center gap-1.5"
                 >
-                  <MessageCircle className="w-3.5 h-3.5 fill-emerald-400/20" />
+                  <MessageCircle className="w-3.5 h-3.5 fill-emerald-500/20" />
                   <span>Get Custom Quote on WhatsApp</span>
                 </a>
               </div>
